@@ -9,5 +9,6 @@ public class BoardEntity {
     private String ctnt;
     private String writer;
     private String createdAt;
-    private String updateAt;
+    private String updatedAt;
 }
+// 테이블과 똑같이 생긴아이
