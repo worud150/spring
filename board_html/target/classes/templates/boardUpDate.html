@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <title>update</title>
+</head>
+<body>
+    <form action="/board/update" method="post">
+        <div style ="display: none;">
+            <input type="text" name="iboard" th:value="${update.iboard}" placeholder="iboard">
+        </div>
+        <div>
+            <input type="text" name="title" th:value="${update.title}" placeholder="제목">
+        </div>
+        <div>
+            <textarea name="content" th:text="${update.content}" placeholder="내용"></textarea>
+        </div>
+        <div>
+            <input type="text" name="writer" th:value="${update.writer}" placeholder="작성자">
+        </div>
+        <div><input type="submit"  value="수정하기"></div>
+    </form>
+</body>
+</html>
