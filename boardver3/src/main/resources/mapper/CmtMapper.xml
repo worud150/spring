@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.boardver3.cmt.CmtMapper">
+
+    <insert id="insBoardCmt" useGeneratedKeys="true" keyProperty="iboardCmt">
+        INSERT INTO t_board_cmt
+        SET iboard = #{iboard}
+        , iuser = #{iuser}
+        , ctnt = #{ctnt}
+
+    </insert>
+
+    <select id="selBoardCmt" resultType="CmtVo">
+        SELECT A.iboard_cmt iboardCmt, A.iboard, A.iuser, A.ctnt, A.created_at createdAt
+                , B.nm writer, B.main_pic writerMainPic
+        FROM t_board_cmt A
+        INNER JOIN t_user B
+        ON A.iuser = B.iuser
+        WHERE A.iboard=#{iboard}
+        LIMIT #{startIdx}, #{row}
+    </select>
+
+    <delete id="delBoardCmt">
+        DELETE FROM t_board_cmt
+        WHERE
+        <if test="iboardCmt > 0 and iuser > 0">
+            iboard_cmt = #{iboardCmt}
+            AND iuser = #{iuser}
+        </if>
+        <if test="iboard > 0">
+            iboard = #{iboard}
+        </if>
+    </delete>
+
+    <update id="updBoardCmt">
+        UPDATE t_board_cmt
+        SET ctnt = #{ctnt},
+        updated_at = now()
+        WHERE iboard_cmt = #{iboardCmt} AND iuser = #{iuser}
+    </update>
+
+
+    <select id="selMaxCmt" resultType="int">
+        SELECT COUNT(iboard)
+        FROM t_board_cmt
+        WHERE iboard=#{iboard}
+
+    </select>
+
+
+
+</mapper>
