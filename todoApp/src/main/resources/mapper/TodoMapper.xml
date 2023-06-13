@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.todoapp.TodoMapper">
+
+    <insert id="insTodo" useGeneratedKeys="true" keyProperty="itodo">
+        INSERT INTO t_todo
+        (ctnt)
+        VALUES
+        ( #{ctnt} )
+    </insert>
+
+    <select id="selTodo">
+        SELECT itodo, ctnt, created_at createdAt, pic
+        FROM t_todo
+        WHERE del_yn = 0
+    </select>
+
+    <select id="selTodoPage">
+        SELECT itodo, ctnt, created_at createdAt, pic, finish_yn finishYn, finish_at finishAt
+        FROM t_todo
+        WHERE del_yn = 0
+        LIMIT #{startIdx}, #{row}
+    </select>
+
+    <update id="finishTodo">
+        UPDATE t_todo
+        set finish_yn = 1
+        WHERE itodo = #{itodo}
+    </update>
+</mapper>
